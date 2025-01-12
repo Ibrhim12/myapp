@@ -33,11 +33,13 @@ android.minapi = 21
 android.ndk = 21e
 android.ndk_path = ~/.buildozer/android/platform/android-ndk-r21e
 
+android.accept_sdk_license = True
+
 # Architectures
 android.arch = armeabi-v7a,arm64-v8a
 
 # Compilation Settings
-p4a.branch = release-2023.01
+p4a.branch = master
 p4a.source_dir = ~/.buildozer/android/platform/python-for-android
 
 # Optimizations
@@ -45,3 +47,10 @@ android.heap_size = 512m
 
 [debug]
 debug = 1
+[app]
+
+
+
+
+
+
