@@ -1,0 +1,19 @@
+<SplashScreen>:
+    RelativeLayout:
+        canvas.before:
+            Rectangle:
+                source: 'assets/ck.png'
+                size: self.size
+                pos: self.pos
+
+        Image:
+            source: 'assets/icon.png'
+            size_hint: None, None
+            size: 200, 200
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+
+        Label:
+            text: 'Loading...'
+            font_size: '24sp'
+            color: 0, 0, 0, 1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.4}

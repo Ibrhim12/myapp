@@ -1,0 +1,71 @@
+<DetectTextScreen>:
+    RelativeLayout:
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                source: 'assets/ck.png'
+                size: self.size
+                pos: self.pos
+
+        Image:
+            source: 'assets/icon.png'
+            size_hint: None, None
+            size: 120, 120
+            pos_hint: {'x': 0.05, 'top': 0.95}
+
+        Label:
+            text: 'Text Phishing Detection'
+            font_size: '26sp'
+            color: 0.93, 0.93, 0.93, 1  # Equivalent of hex_to_rgba("#EDEDED")
+            bold: True
+            size_hint: None, None
+            pos_hint: {'center_x': 0.5, 'top': 0.80}
+
+        GridLayout:
+            cols: 1
+            spacing: 20
+            size_hint: 0.4, 0.3
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            TextInput:
+                id: text_input
+                hint_text: 'Enter text to check for phishing'
+                size_hint_y: None
+                height: 80
+                font_name: 'assets/UrduFont'
+                font_size: 18
+                background_color: 1, 1, 1, 1
+                foreground_color: 0, 0, 0, 1
+
+            Label:
+                id: result_label
+                text: ''
+                font_size: 22
+                color: 1, 1, 1, 1
+                bold: True
+                size_hint_y: None
+                height: 40
+
+            Button:
+                text: 'Detect'
+                size_hint_y: None
+                height: 60
+                background_color: 0.129, 0.588, 0.953, 1  # Equivalent of hex_to_rgba("#2196F3")
+                color: 0.93, 0.93, 0.93, 1  # Equivalent of hex_to_rgba("#EDEDED")
+                on_press: root.detect_text()
+
+            Button:
+                text: 'Back'
+                size_hint_y: None
+                height: 60
+                background_color: 0.129, 0.588, 0.953, 1  # Equivalent of hex_to_rgba("#2196F3")
+                color: 0.93, 0.93, 0.93, 1  # Equivalent of hex_to_rgba("#EDEDED")
+                on_press: root.manager.current = 'main'
+
+        Label:
+            text: '©2024 EZI Phishing Detection. All rights reserved.'
+            font_size: 16
+            size_hint: 1, 0.05
+            color: 1, 1, 1, 1
+            pos_hint: {'x': 0, 'y': 0}

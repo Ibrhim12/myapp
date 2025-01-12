@@ -1,0 +1,68 @@
+<ViewScrappedDataScreen>:
+    RelativeLayout:
+        canvas.before:
+            Rectangle:
+                source: 'assets/ck2.png'
+                size: self.size
+                pos: self.pos
+
+        Image:
+            source: 'assets/icon.png'
+            size_hint: None, None
+            size: 120, 120
+            pos_hint: {'x': 0.05, 'top': 0.95}
+
+        Label:
+            text: 'View Scraped Data'
+            bold: True
+            font_size: '20sp'
+            size_hint: None, None
+            color: 0.9, 0.9, 0.9, 1
+            pos_hint: {'center_x': 0.5, 'top': 0.95}
+
+        ScrollView:
+            size_hint: 0.8, 0.6
+            pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+
+            BoxLayout:
+                id: data_layout
+                orientation: 'vertical'
+                size_hint_y: None
+                spacing: 15
+                padding: 10
+                height: self.minimum_height 
+
+                # Ensuring clear separation of each row
+                Label:
+                    text: 'URL: https://www.iub.edu.pk'
+                    bold: True
+                    font_size: '16sp'
+                    size_hint_y: None
+                    text_size: self.width, None
+                    halign: 'left'
+                    valign: 'top'
+                    height: self.texture_size[1]
+
+                Label:
+                    text: 'Scraped Text: This is the example scraped text from the website.'
+                    font_size: '14sp'
+                    size_hint_y: None
+                    text_size: self.width, None
+                    halign: 'left'
+                    valign: 'top'
+                    height: self.texture_size[1]
+
+        Button:
+            text: 'Back'
+            size_hint: 0.2, None
+            background_color: 0.992, 0.0, 0.0, 1
+            size: 100, 50
+            pos_hint: {'center_x': 0.5, 'y': 0.05}
+            on_press: root.manager.current = 'realtime_detection'
+
+        Label:
+            text: '©2024 EZI Phishing Detection. All rights reserved.'
+            font_size: 16
+            size_hint: 1, 0.05
+            color: 1, 1, 1, 1
+            pos_hint: {'x': 0, 'y': 0}

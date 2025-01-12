@@ -1,0 +1,86 @@
+<RealTimeDetectionScreen>:
+    RelativeLayout:
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1  # White background
+            Rectangle:
+                source: 'assets/ck.png'
+                size: self.size
+                pos: self.pos
+
+        # Logo on the left
+        Image:
+            source: 'assets/icon.png'
+            size_hint: None, None
+            size: 120, 120
+            pos_hint: {'x': 0.05, 'top': 0.95}
+
+        # Introductory Text (centered)
+        Label:
+            text: 'Web-Based Phishing Detection'
+            font_size: '20sp'
+            color: 0.93, 0.93, 0.93, 1  # Hex #EDEDED
+            bold: True
+            size_hint: None, None
+            pos_hint: {'center_x': 0.5, 'top': 0.83}
+
+        # URL Input Field
+        TextInput:
+            id: url_input
+            hint_text: "Enter URL"
+            multiline: False
+            size_hint: 0.6, 0.1
+            pos_hint: {'center_x': 0.5, 'top': 0.73}
+
+        # Button Grid
+        GridLayout:
+            cols: 1
+            spacing: 20
+            size_hint: 0.4, 0.4
+            pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+
+            # Status Label
+            Label:
+                id: status_label
+                text: 'Web-Based Detection is Stopped'
+                font_size: 18
+                color: 1, 1, 1, 1
+                bold: True
+                size_hint_y: None
+                height: 40
+
+            # Start/Stop Button
+            Button:
+                id: start_stop_button
+                text: 'Start Detection'
+                size_hint_y: None
+                height: 60
+                background_color: 1, 0, 0, 1  # Hex #FD0000
+                color: 1, 1, 1, 1
+                on_press: root.toggle_realtime_detection()
+
+            # View Scraping Data Button
+            Button:
+                text: 'View Scraping Data'
+                size_hint_y: None
+                height: 60
+                background_color: 1, 0, 0, 1  # Hex #FD0000
+                color: 1, 1, 1, 1
+                on_press: root.manager.current = 'view_scrapped_data'
+
+            # Back Button
+            Button:
+                text: 'Back'
+                size_hint_y: None
+                height: 60
+                background_color: 1, 0, 0, 1  # Hex #FD0000
+                color: 1, 1, 1, 1
+                on_press: root.manager.current = 'main'
+
+        # Copyright Reserved Bar at the Bottom
+        Label:
+            text: '©2024 EZI Phishing Detection. All rights reserved.'
+            font_size: 16
+            size_hint: 1, 0.05
+            color: 1, 1, 1, 1
+            pos_hint: {'x': 0, 'y': 0}

@@ -1,0 +1,69 @@
+<DetectURLScreen>:
+    RelativeLayout:
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1  # Adjust the color if needed
+            Rectangle:
+                source: 'assets/ck.png'
+                size: self.size
+                pos: self.pos
+
+        Image:
+            source: 'assets/icon.png'
+            size_hint: None, None
+            size: 120, 120
+            pos_hint: {'x': 0.05, 'top': 0.95}
+
+        Label:
+            text: 'URL Phishing Detection'
+            font_size: '26sp'
+            color: 1, 1, 1, 1
+            bold: True
+            size_hint: None, None
+            pos_hint: {'center_x': 0.5, 'top': 0.80}
+
+        GridLayout:
+            cols: 1
+            spacing: 20
+            size_hint: 0.4, 0.3
+            height: 300
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            TextInput:
+                id: url_input
+                hint_text: 'Enter URL here'
+                size_hint_y: None
+                height: 80
+                font_size: 18
+
+            Label:
+                id: result_label
+                text: ''
+                font_size: 22
+                color: 1, 1, 1, 1
+                bold: True
+                size_hint_y: None
+                height: 40
+
+            Button:
+                text: 'Detect URL'
+                size_hint_y: None
+                height: 60
+                background_color: 0.298, 0.686, 0.314, 1  # Green color for button
+                color: 1, 1, 1, 1
+                on_press: root.detect_url()
+
+            Button:
+                text: 'Back'
+                size_hint_y: None
+                height: 60
+                background_color: 0.298, 0.686, 0.314, 1  # Green color for button
+                color: 1, 1, 1, 1
+                on_press: root.manager.current = 'main'
+
+        Label:
+            text: '©2024 EZI Phishing Detection. All rights reserved.'
+            font_size: 16
+            size_hint: 1, 0.05
+            color: 1, 1, 1, 1
+            pos_hint: {'x': 0, 'y': 0}
