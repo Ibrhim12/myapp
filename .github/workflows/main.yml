@@ -1,48 +1,48 @@
-name: CI
+name: Build Android APK
+
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      # used to cache dependencies with a timeout
-      - name: Get Date
-        id: get-date
-        run: |
-          echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
-        shell: bash
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
 
-      - name: Cache Buildozer global directory
-        uses: actions/cache@v3
-        with:
-          path: .buildozer_global
-          key: buildozer-global-${{ hashFiles('buildozer.spec') }} # Replace with your path
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y build-essential git zlib1g-dev \
+                            libncurses5-dev libgdbm-dev libc6-dev libsqlite3-dev \
+                            tk-dev libssl-dev openssl libffi-dev libbz2-dev
 
-      - uses: actions/cache@v3
-        with:
-          path: .buildozer
-          key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-${{ hashFiles('buildozer.spec') }}
+    - name: Install Buildozer and dependencies
+      run: |
+        pip install buildozer
+        sudo apt update
+        sudo apt install -y python3-pip python3-setuptools python3-wheel
+        sudo apt install -y cython libffi-dev libssl-dev
 
-      - name: Build with Buildozer
-        run: |
-          pip3 install --user --upgrade buildozer Cython virtualenv
-          export PATH=$PATH:~/.local/bin/
-          export APP_ANDROID_ACCEPT_SDK_LICENSE=1 
-          export BUILDOZER_WARN_ON_ROOT=0
-          sudo apt update 
-          sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev 
-          cd ${{ github.workspace }}
-          buildozer android debug
+    - name: Initialize Buildozer
+      run: buildozer init
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: package
-          path: bin/*.apk
+    - name: Build APK
+      run: buildozer -v android debug
+
+    - name: Archive APK
+      uses: actions/upload-artifact@v2
+      with:
+        name: MyApp-APK
+        path: bin/*.apk
